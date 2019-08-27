@@ -10,35 +10,21 @@ db.collection("matches").onSnapshot(function (snapShot) {
         
         listRound.push(round) ;
     }
-    rankingTableRef.get().then( function(docs){
-            listClub = [];
-            docs.docs.forEach(element => {
-                listClub.push(element.data());
-            });
-            
-            updateRankingTable(listClub, listRound);
-        });
+    rankingTableRef.onSnapshot(function (snapShot) {
+        const tables = snapShot.docChanges();
+        for (let i = 0; i < tables.length; i++) {
+            const club = tables[i].doc.data();
+            if(listClub.length < 20) {
+                listClub.push(club)  ;
+            }
+        }
+        updateRankingTable(listClub, listRound);
+    });
 }); 
 
 let rankingTableRef = db.collection("rankingTable");
 let matchesRef = db.collection("matches");
 
-
-// matchesRef.onSnapshot( function(snapShot){
-//     matchesRef.get().then( function(docs){
-//         listRound = [];
-//         docs.docs.forEach(element => {
-//             listRound.push(element.data());
-//         });
-//         rankingTableRef.get().then( function(docs){
-//             listClub = [];
-//             docs.docs.forEach(element => {
-//                 listClub.push(element.data());
-//             });
-//             updateRankingTable(listClub, listRound);
-//         });
-//     })
-// });
 
 
 export function addRound(c) {
