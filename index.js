@@ -8,7 +8,7 @@ import "./model/rounds.js";
 window.onload = function() {
     view.setScreen(screen, "header");
     const btnMatch = document.getElementById('js-btnMatch');
-    btnMatch.classList.remove("btn-secondary");
-    btnMatch.classList.add("btn-light");
+    btnMatch.classList.remove("btn-light");
+    btnMatch.classList.add("btn-secondary");
     view.setScreen(match, "app");
 }

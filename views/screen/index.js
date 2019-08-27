@@ -6,7 +6,7 @@ import teams from "./clubs.js";
 import messages from "../messages.js";
 import newAuthController from "../../controller/authController.js";
 import { responseCode } from '../../controller/response.js';
-import editorScreen from "./editorIndex.js";
+import admin from "./admin.js";
 
 const screenPage = `
 
@@ -105,7 +105,8 @@ function onload() {
                 switch(response.code){
                     case responseCode.auth.login.success:
                         $('#modal_login').modal('hide')
-                        view.setScreen(editorScreen, "header");             
+
+                        view.setScreen(admin, "header");             
                         break;
                 }
             }
