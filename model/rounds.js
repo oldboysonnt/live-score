@@ -3,34 +3,25 @@ import { updateRankingTable , sortRankingTable} from "./rankingTable.js";
 
 let listRound = [];
 let listClub = [];
-
-let rankingTableRef = db.collection("rankingTablePL");
-let matchesRef = db.collection("matches");
-
-
-matchesRef.onSnapshot(function (snapShot) {
+db.collection("matches").onSnapshot(function (snapShot) {
     const rounds = snapShot.docChanges();
     for (let i = 0; i < rounds.length; i++) {
         const round = rounds[i].doc.data();
         
         listRound.push(round) ;
     }
-    rankingTableRef.onSnapshot(function (snapShot) {
-        const tables = snapShot.docChanges();
-        const table = tables[0].doc.data();
-        let listClubName = Object.keys(table);
-           
-        for (let i = 0; i < listClubName.length; i++) {
-            const club = table[listClubName[i]];
-            if(listClub.length < 20) {
-                listClub.push(club)  ;
-            }
-        }
-        updateRankingTable(listClub, listRound);
-    });
+    rankingTableRef.get().then( function(docs){
+            listClub = [];
+            docs.docs.forEach(element => {
+                listClub.push(element.data());
+            });
+            
+            updateRankingTable(listClub, listRound);
+        });
 }); 
 
-
+let rankingTableRef = db.collection("rankingTable");
+let matchesRef = db.collection("matches");
 
 
 // matchesRef.onSnapshot( function(snapShot){
@@ -60,7 +51,7 @@ export function addRound(c) {
 function updateRounds(){
     for(let i = 0; i < listRound.length; i++){
         updateMatchList(listRound[i].matches);
-        db.collection("matches").doc("round_" + i + 1).set({
+        db.collection("matches").doc(format(i + 1) + "-round_" + i + 1).set({
             matches : listRound[i].matches
         });
     }
@@ -69,7 +60,7 @@ function updateRounds(){
 
 
 function removeRound(c) {
-    db.collection("matches").doc("round_" + c).delete();
+    db.collection("matches").doc(format(c) + "-round_" + c).delete();
 }
 
 export {listRound} ;

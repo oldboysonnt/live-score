@@ -67,9 +67,9 @@ function loadMatch(id, match) {
             />
             
         </td>
-        <td><p class="mt-3">${match.teamHome.goals}</p></td>
-        <td><p class="mt-3"> - </p></td>
-        <td><p class="mt-3">${match.teamAway.goals}</p></td>
+        <td>${match.teamHome.goals}</td>
+        <td> - </td>
+        <td>${match.teamAway.goals}</td>
         <td  style="text-align: left !important">
             
             <img id = "js-img"
@@ -79,7 +79,7 @@ function loadMatch(id, match) {
             />
             ${match.teamAway.name}
         </td>
-        <td><p class="mt-3">${match.status}</p></td>
+        <td>${match.status}</td>
     </tr>
     `
     matches.insertAdjacentHTML("beforeend", newMatch)
