@@ -30,7 +30,6 @@ const rankingScreen =
 `;
 
 
-
 function onload() {
     const rankingTableController = newRankingTableController();
     sortRankingTable(listClub);
@@ -58,7 +57,6 @@ function loadTeam(team, i) {
     `
     rankingTable.insertAdjacentHTML("beforeend", newTeam)
     
-    console.log(team.logo);
     // const imgDiv = document.getElementById("js-img");
     // imgDiv.setAttribute("src",team.logo);
 }
