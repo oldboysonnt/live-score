@@ -9,6 +9,7 @@ let matchesRef = db.collection("matches");
 
 rankingTableRef.onSnapshot(function (snapShot) {
     const tables = snapShot.docChanges();
+
     for (let i = 0; i < tables.length; i++) {
         const club = tables[i].doc.data();
         if(listClub.length < 20) {
