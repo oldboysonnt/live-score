@@ -11,7 +11,6 @@ const newsScreen = `
 
 function onload() {
   loadNews();
-
 }
 
 function renderNews(data){
@@ -40,4 +39,4 @@ const news = {
     onload: onload
 }
 
-export default news
+export default news;
