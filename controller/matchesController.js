@@ -6,9 +6,10 @@ function newMatchController() {
     controller.addMatch = function (roundNo, match) {
         addMatch(roundNo, match);
     }
-    controller.removeMatch = function (roundNo) {
+    controller.removeMatch = function (roundNo, match) {
         removeMatch(roundNo, match);
     }
+    return controller;
 }
 
 export default newMatchController;

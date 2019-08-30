@@ -70,9 +70,9 @@ function loadTable() {
     }
 }
 
-const ranking = {
+const editorRanking = {
     content: rankingScreen,
     onload: onload,
 }
 
-export default ranking
+export default editorRanking;

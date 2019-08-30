@@ -4,19 +4,23 @@ let listClub = [];
 
 let rankingTableRef = db.collection("rankingTable");
 let matchesRef = db.collection("matches");
-
+let docRef = db.collection("testSomething").doc("ocVSeYJ5ZYDHmdPRb7Ux");
 
 
 rankingTableRef.onSnapshot(function (snapShot) {
     const tables = snapShot.docChanges();
-
     for (let i = 0; i < tables.length; i++) {
         const club = tables[i].doc.data();
         if(listClub.length < 20) {
             listClub.push(club)  ;
-        }
+        } else break;
     }
 });
+
+export function loadListClub() {
+    return listClub;
+}
+
 
 
 
@@ -29,22 +33,22 @@ export function updateRankingTable( listClub, listRound ){
         listClub[i].numberOfMatchesPlayed = 0;
         for(let j = 0;j < listRound.length; j++){
             for(let k = 0; k < listRound[j].matches.length; k ++){
-                if(listRound[j].matches[k].status === "finished"){
+                if(listRound[j].matches[k].time === "finished"){
                     if ( listClub[i].name === listRound[j].matches[k].teamAway.name ){
-                            if( listRound[j].matches[k].teamAway.goals > listRound[j].matches[k].teamHome.goals ) {
+                            if( parseInt(listRound[j].matches[k].teamAway.goals) > parseInt(listRound[j].matches[k].teamHome.goals) ) {
                                 listClub[i].points += 3;
                             }
-                            else if ( listRound[j].matches[k].teamAway.goals === listRound[j].matches[k].teamHome.goals ) {
+                            else if ( parseInt(listRound[j].matches[k].teamAway.goals) === parseInt(listRound[j].matches[k].teamHome.goals) ) {
                                 listClub[i].points += 1;
                             }
                             listClub[i].offset += listRound[j].matches[k].teamAway.goals - listRound[j].matches[k].teamHome.goals;
                             listClub[i].numberOfMatchesPlayed++;
                     } 
                     else if ( listClub[i].name === listRound[j].matches[k].teamHome.name ){
-                            if( listRound[j].matches[k].teamAway.goals < listRound[j].matches[k].teamHome.goals ) {
+                            if( parseInt(listRound[j].matches[k].teamAway.goals) < parseInt(listRound[j].matches[k].teamHome.goals) ) {
                                 listClub[i].points += 3;
                             }
-                            else if ( listRound[j].matches[k].teamAway.goals === listRound[j].matches[k].teamHome.goals ) {
+                            else if ( parseInt(listRound[j].matches[k].teamAway.goals) === parseInt(listRound[j].matches[k].teamHome.goals) ) {
                                 listClub[i].points += 1;
                             }
                             listClub[i].offset += listRound[j].matches[k].teamHome.goals - listRound[j].matches[k].teamAway.goals;
@@ -74,6 +78,7 @@ export function sortRankingTable(table) {
     });
     return table;
 }
+
 
 
 

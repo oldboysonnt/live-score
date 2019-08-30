@@ -10,14 +10,13 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./index.css">
-    <link rel="stylesheet" href="./responsive.css">
     <title>Document</title>
   </head>
 
   <body>
     <div id = "header"></div>
     <div id= "app"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
@@ -25,19 +24,30 @@
     <script>
       // Your web app's Firebase configuration
       var firebaseConfig = {
-            apiKey: "AIzaSyDZOHRE2oVTmgO8asEjAUe9KILFm9g7IV4",
-            authDomain: "livescore-temp.firebaseapp.com",
-            databaseURL: "https://livescore-temp.firebaseio.com",
-            projectId: "livescore-temp",
-            storageBucket: "livescore-temp.appspot.com",
-            messagingSenderId: "906838507901",
-            appId: "1:906838507901:web:ea169be6803a0a28"
-        };
-      // Initialize Firebase
+        apiKey: "AIzaSyD8ihUdYww1Rbokh8PFvOJ9GzQxamcAMpM",
+        authDomain: "livescore-71.firebaseapp.com",
+         databaseURL: "https://livescore-71.firebaseio.com",
+        projectId: "livescore-71",
+        storageBucket: "",
+        messagingSenderId: "517527007769",
+        appId: "1:517527007769:web:d8f3f7ee38d66cd4"
+       };
+  // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-      var db = firebase.firestore();
-    //   console.log(db);
       
+      var db = firebase.firestore();
+    //    let team = ["Liverpool","Man. City","Man. United","Everton","Sheff Utd","Chelsea","Norwich City","West Ham","Brighton",
+    //   "Bournemouth","Southampton","Tottenham","Burnley FC","Leicester City","Crystal Palace","Wolves","Aston Villa",
+    // "Newcastle","Watford","Arsenal"]; 
+    //  for ( let i = 0; i < 20; i++) {
+    //    db.collection("rankingTable").doc(team[i]).set ({
+    //      name : team[i],
+    //      logo : "",
+    //      points : 0,
+    //      offset : 0,
+    //      numberOfMatchesPlayed : 0
+    //    });
+    //  }
     </script>
 
     <script

@@ -3,6 +3,7 @@ import { updateRankingTable , sortRankingTable} from "./rankingTable.js";
 
 let listRound = [];
 let listClub = [];
+
 db.collection("matches").onSnapshot(function (snapShot) {
     const rounds = snapShot.docChanges();
     for (let i = 0; i < rounds.length; i++) {
@@ -18,17 +19,23 @@ db.collection("matches").onSnapshot(function (snapShot) {
                 listClub.push(club)  ;
             }
         }
-        updateRankingTable(listClub, listRound);
+       // updateRankingTable(listClub, listRound);
     });
 }); 
+
+
+
 
 let rankingTableRef = db.collection("rankingTable");
 let matchesRef = db.collection("matches");
 
-
+export function format (c) {
+    if (c < 10) return   "0" + c;
+    else return c;
+}
 
 export function addRound(c) {
-    db.collection("matches").doc("round_" + c).set({
+    db.collection("matches").doc("round_" + format(c)).set({
         matches : []
     });
 }
@@ -37,7 +44,7 @@ export function addRound(c) {
 function updateRounds(){
     for(let i = 0; i < listRound.length; i++){
         updateMatchList(listRound[i].matches);
-        db.collection("matches").doc(format(i + 1) + "-round_" + i + 1).set({
+        db.collection("matches").doc("round_" + i + 1).set({
             matches : listRound[i].matches
         });
     }
@@ -45,8 +52,14 @@ function updateRounds(){
 }
 
 
-function removeRound(c) {
-    db.collection("matches").doc(format(c) + "-round_" + c).delete();
+export function removeRound(c) {
+    db.collection("matches").doc("round_" + format(c)).delete();
 }
+
+
+export function loadListRound() {
+    return listRound;
+}
+
 
 export {listRound} ;

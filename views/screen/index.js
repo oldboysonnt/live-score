@@ -1,12 +1,12 @@
 import view from "../view.js";
-import match from "./matches.js";
+import matches from "./matches.js";
 import ranking from "./rankingTable.js";
 import news from "./news.js";
 import teams from "./clubs.js";
 import messages from "../messages.js";
 import newAuthController from "../../controller/authController.js";
 import { responseCode } from '../../controller/response.js';
-import editorScreen from "./editorIndex.js";
+import editorScreen from "../editorScreen/editorIndex.js";
 
 const screenPage = `
 
@@ -53,11 +53,17 @@ const screenPage = `
 function onload() {
     const formLogin = document.getElementById("js-formLogin");
     const btnMatch = document.getElementById('js-btnMatch');
+    const btnMatches = document.getElementById('js-btnMatch');
+    btnMatches.classList.remove("btn-secondary");
+    btnMatches.classList.add("btn-light");
+    view.setScreen(matches, "app");
+
+
     btnMatch.addEventListener('click', function() {
         removeLightUpTabs();
         btnMatch.classList.remove("btn-secondary");
         btnMatch.classList.add("btn-light");
-        view.setScreen(match, 'app')
+        view.setScreen(matches, 'app')
     })
     const btnRanking = document.getElementById('js-btnRanking');
     btnRanking.addEventListener('click', function() {

@@ -1,11 +1,14 @@
-import {listRound,addRound, removeRound} from "../model/rounds.js";
+import {addRound, removeRound} from "../model/rounds.js";
 
 function newRoundController(){
     const controller = {};
-    controller.addRound = function (){
-        addRound(listRound.length + 1);
+    controller.addRound = function (c){
+        addRound(c);
     }
-    controller.removeRound = function () {
-        removeRound(listRound.length);
+    controller.removeRound = function (c) {
+        removeRound(c);
     }
+    return controller;
 }
+
+export default newRoundController;

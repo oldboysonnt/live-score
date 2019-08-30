@@ -4,7 +4,7 @@
    flex-direction: row;
  }
  .card {
-    margin: 5px;
+     margin: 5px ;
  }
  .ahihi{
    text-align: center;
@@ -17,11 +17,11 @@
    text-decoration : underline ;
  }
  .img {
-   transition: transform 0.8s;
+   transition: transform 1s;
    
  }
  .img:hover {
-   transform: scale(1.05); 
+   transform: scale(1.1); 
  }
 
  *{
@@ -64,10 +64,9 @@ body{
   font-size: 20px;
 }
 .small-text{
-  margin-left : 25px;
+  margin: 10px;
 }
 .smaller-text {
   font-size: 12px;
 }
-
 

@@ -1,6 +1,6 @@
 
-import {listRound} from "./rounds.js";
-    
+import {listRound,format} from "./rounds.js";
+import listClub from "./rankingTable.js";   
 
 
 let listMatches=[];
@@ -12,37 +12,36 @@ function loadMatchesInRound(index) {
 
 
 export function addMatch (roundNo, match) {
-    db.collection("matches").doc("round_" + roundNo).update(
+    db.collection("matches").doc("round_" + format(roundNo)).update(
         {
             matches : firebase.firestore.FieldValue.arrayUnion(match)
         }
     )
 }
 
+const match = {
+    day  : "10/08",
+    time : "finished",
+    teamHome : {
+        name : "Man. City",
+        goals : "6"
+    },
+    teamAway : {
+        name :"Man. United",
+        goals : "1"
+    }
+}
+
+
 export function removeMatch(roundNo,match) {
-    db.collection("matches").doc("round_" + roundNo).update(
+    db.collection("matches").doc("round_" + format(roundNo)).update(
         {
             matches : firebase.firestore.FieldValue.arrayRemove(match)
         }
     )
 }
 
-function updateMatch(match){
-    if (match.status === "finished") {
-        if (match.teamAway.goals > match.teamHome.goals) {
-            match.teamAway.points = 3;
-            match.teamHome.points = 0;
-        }
-        else if (match.teamHome.goals > match.teamAway.goals) {
-            match.teamAway.points = 0;
-            match.teamHome.points = 3;
-        }
-        else {
-            match.teamAway.points = 1;
-            match.teamHome.points = 1;
-        }
-    }
-}
+
 export function updateMatchList(matchList){
     for(let i = 0;i < matchList.length; i++) {
         updateMatch(matchList[i]);
